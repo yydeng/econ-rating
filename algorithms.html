@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Method - Ranking Scholars in Economics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+        };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .method-table-wrap {
+            border: 1px solid var(--line);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+        .method-table-wrap table.std {
+            font-size: 0.95em;
+        }
+        .method-table-wrap table.std .group-row td {
+            background: var(--lavender-soft);
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8em;
+            padding: 10px 14px;
+        }
+        .formula {
+            font-family: 'Cambria Math', 'Latin Modern Math', Georgia, serif;
+            color: var(--ink);
+        }
+        .pill {
+            display: inline-block;
+            padding: 2px 10px;
+            background: var(--lavender);
+            color: var(--primary);
+            border-radius: 999px;
+            font-size: 0.78em;
+            font-weight: 600;
+            letter-spacing: 0.6px;
+            margin-left: 6px;
+        }
+        ul.tight {
+            margin: 8px 0 0;
+            padding-left: 22px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="nav-wrap">
+            <a class="brand" href="index.html">
+                <span class="brand-mark">Ranking Scholars in Economics</span>
+            </a>
+            <nav class="site-nav">
+                <a href="index.html">Home</a>
+                <a href="ranking.html">Ranking</a>
+                <a href="algorithms.html" class="active">Method</a>
+                <a href="university.html">University</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page">
+        <section class="section">
+            <span class="section-eyebrow">Methodology</span>
+            <h1 class="section-title">Ranking Methods</h1>
+            <p class="section-lead">Formal definitions of the scholar-ranking rules used throughout this site.</p>
+
+            <div class="card method-table-wrap" style="padding:0;">
+                <table class="std method-table">
+                    <thead>
+                        <tr>
+                            <th style="width:24%;">Index</th>
+                            <th>Definition</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="group-row"><td colspan="2">Existing indices</td></tr>
+                        <tr>
+                            <td>h-index</td>
+                            <td>The largest <em>h</em> such that <em>h</em> papers have at least <em>h</em> citations each</td>
+                        </tr>
+                        <tr>
+                            <td>i10-index</td>
+                            <td>The number of papers with at least 10 citations</td>
+                        </tr>
+                        <tr>
+                            <td>Euclidean index</td>
+                            <td class="formula">\(\sqrt{\sum_i x_i^2}\), where $x_i$ is the number of citations of paper $i$</td>
+                        </tr>
+                        <tr>
+                            <td>Total Citation</td>
+                            <td>Total number of citations</td>
+                        </tr>
+                        <tr>
+                            <td>Total Publication</td>
+                            <td>Total number of publications</td>
+                        </tr> 
+                        <tr class="group-row"><td colspan="2">Bean-Counting (BC) family</td></tr>
+                        <tr>
+                            <td>ABC <span class="pill">Absolute Bean Counting</span></td>
+                            <td class="formula">\( \#\{\text{Top Five}\} \)</td>
+                        </tr>
+                        <tr>
+                            <td>ABC_A <span class="pill">Absolute Bean Counting</span></td>
+                            <td class="formula">\( \#\{\text{Top Five or Top A}\} \)</td>
+                        </tr>
+                        <tr>
+                            <td>DBC <span class="pill">Discounted Bean Counting</span></td>
+                            <td class="formula">\(\#\{\text{Top Five}\} + 0.5 \times \#\{\text{outside Top Five}\}\)</td>
+                        </tr>
+                        <tr>
+                            <td>CRBC <span class="pill">Citation-Restricted Bean Counting</span></td>
+                            <td class="formula">\(\#\{\text{Top Five and with at least 10 citations}\}\)</td>
+                        </tr>
+                        <tr>
+                            <td>CEBC <span class="pill">Citation-Expanded Bean Counting</span></td>
+                            <td class="formula">\(\#\{\text{Top Five or with at least 10 citations}\}\)</td>
+                        </tr>
+                        <tr>
+                            <td>TCEBC <span class="pill">Tiered Citation-Expanded Bean Counting</span></td>
+                            <td class="formula">$\#\{\text{Top Five}\} + 0.5 \times \#\{\text{Top A}\} + 0.5 \times \#\{\text{non-Top-Five/Top-A and with at least 10 citations}\}$</td>
+                        </tr>
+
+                        <tr class="group-row"><td colspan="2">CES family</td></tr>
+                        <tr>
+                            <td>ACES <span class="pill">Asymmetric CES</span></td>
+                            <td class="formula">\(\left(\sum_{\text{Top Five}} \sqrt{x_i}\right)^2 + 0.5 \times \sqrt{\sum_{\text{non-Top-Five}} x_i^2}\), where $x_i$ is the number of citations of paper $i$</td>
+                        </tr>
+                        <tr>
+                            <td>ABC + CES</td>
+                            <td class="formula">\(\#\{\text{Top Five}\} + \sqrt{\sum_{\text{non-Top-Five}} x_i^2}\), where $x_i$ is the number of citations of paper $i$</td>
+                        </tr>
+                        <tr>
+                            <td>ABC &times; CES</td>
+                            <td class="formula">\(\#\{\text{Top Five}\} \times \sqrt{\sum_{\text{non-Top-Five}} x_i^2}\), where $x_i$ is the number of citations of paper $i$</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="section" id="journal-lists">
+            <span class="section-eyebrow">Definition</span>
+            <h2 class="section-title">Journal Lists</h2>
+            <p class="section-lead">The ranking methods use journal lists based on Heckman and Moktan (2020).</p>
+
+            <div class="journal-block">
+                <div class="journal-card">
+                    <h3>Top Five</h3> 
+                    <ul class="tight">
+                        <li>American Economic Review</li>
+                        <li>Econometrica</li>
+                        <li>Journal of Political Economy</li>
+                        <li>Quarterly Journal of Economics</li>
+                        <li>Review of Economic Studies</li>
+                    </ul>
+                </div>
+                <div class="journal-card">
+                    <h3>Top A</h3> 
+                    <p><strong>Non-Top-Five general-interest journals:</strong></p>
+                    <ul class="tight">
+                        <li>Review of Economics and Statistics</li>
+                        <li>Economic Journal</li>
+                        <li>Journal of the European Economic Association</li>
+                        <li>European Economic Review</li>
+                        <li>International Economic Review</li> 
+                    </ul>
+                    <div style="height: 6px;"></div>
+                    <p><strong>Leading field journals:</strong></p>
+                    <ul class="tight"> 
+                        <li>Journal of Development Economics</li>
+                        <li>Journal of Econometrics</li>
+                        <li>Journal of Business and Economic Statistics</li>
+                        <li>Journal of Economic Growth</li>
+                        <li>Journal of Financial Economics</li>
+                        <li>Journal of Finance</li>
+                        <li>Journal of Economic Theory</li>
+                        <li>Games and Economic Behavior</li>
+                        <li>Journal of Health Economics</li>
+                        <li>Health Economics</li>
+                        <li>RAND Journal of Economics</li>
+                        <li>Journal of Industrial Economics</li>
+                        <li>Journal of Labor Economics</li>
+                        <li>Journal of Human Resources</li>
+                        <li>Journal of Monetary Economics</li>
+                        <li>Journal of Money, Credit and Banking</li>
+                        <li>Journal of Public Economics</li>
+                        <li>Public Choice</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="field-classification">
+            <span class="section-eyebrow">Label</span>
+            <h2 class="section-title">Field Classification</h2>
+            <p class="section-lead">Paper-level field classification and scholar-level primary-field assignment.</p>
+
+            <div class="card">
+                <p style="margin:0 0 12px;">
+                    We classify publications into <strong>13 economics fields</strong>, plus an <strong>&ldquo;Other&rdquo;</strong> category, using a Large Language Model based on each paper's title, keywords, and abstract. Each paper is assigned to the field with the highest predicted probability.
+                </p>
+                <p style="margin:0;">
+                    A scholar's <strong>primary field</strong> is the field with the largest share of their publications. Scholars whose primary field accounts for at least <strong>50%</strong> of their publications are treated as <strong>single-field</strong> scholars, and their primary field is displayed. Scholars whose primary field accounts for less than <strong>50%</strong> are labeled as <strong>multi-field</strong>.
+                </p>
+            </div>
+        </section>
+    </main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-title">
+      Ranking Scholars in Economics &middot; The Chinese University of Hong Kong
+    </div>
+
+    <div class="footer-contact">
+      <span class="footer-label">Contact:</span>
+
+      <span class="footer-person">
+        Yangyi Deng
+        <a href="mailto:dengyangyi@link.cuhk.edu.hk">
+          dengyangyi@link.cuhk.edu.hk
+        </a>
+      </span>
+
+      <span class="footer-separator">&middot;</span>
+
+      <span class="footer-person">
+        Chiu Yu Ko
+        <a href="mailto:chiuyuko@cuhk.edu.hk">
+          chiuyuko@cuhk.edu.hk
+        </a>
+      </span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,429 @@
+/* ============================================================
+   Shared stylesheet — Ranking Scholars in Economics
+   Purple academic theme with rounded cards and clean hierarchy.
+   ============================================================ */
+
+:root {
+    --primary: #502D7F;
+    --primary-dark: #3E2261;
+    --primary-light: #8A2BE2;
+    --lavender: #E6E6FA;
+    --lavender-soft: #F3EEFB;
+    --lavender-pale: #F8F5FD;
+    --thistle: #D8BFD8;
+    --ink: #1F1B2E;
+    --text: #2D2940;
+    --muted: #6B6580;
+    --line: #E4DDF0;
+    --card-bg: #FFFFFF;
+    --page-bg: #F7F4FC;
+    --shadow-sm: 0 1px 3px rgba(46, 23, 89, 0.06);
+    --shadow-md: 0 4px 18px rgba(46, 23, 89, 0.08);
+    --shadow-lg: 0 12px 32px rgba(46, 23, 89, 0.12);
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--page-bg);
+    color: var(--text);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+a { color: var(--primary); }
+a:hover { color: var(--primary-dark); }
+
+/* ---------- Top bar / navigation ---------- */
+.site-header {
+    background: linear-gradient(135deg, #502D7F 0%, #6E3FAE 100%);
+    color: #fff;
+    padding: 14px 0;
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+.site-header .nav-wrap {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.site-header .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #fff;
+}
+.site-header .brand-mark {
+    height: 38px;
+    padding: 0 14px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.18);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.05em;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(4px);
+}
+.site-header .brand-title {
+    font-size: 1.15em;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+.site-nav {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+.site-nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 0.95em;
+    font-weight: 500;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    opacity: 0.9;
+}
+.site-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.16);
+    opacity: 1;
+}
+.site-nav a.active {
+    background-color: rgba(255, 255, 255, 0.22);
+    opacity: 1;
+}
+
+/* ---------- Page layout ---------- */
+.page {
+    flex: 1;
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 36px 28px 64px;
+}
+.page-narrow {
+    max-width: 960px;
+}
+
+/* ---------- Section + card primitives ---------- */
+.section {
+    margin-bottom: 36px;
+}
+.section-eyebrow {
+    display: inline-block;
+    color: var(--primary);
+    font-size: 0.78em;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+.section-title {
+    font-size: 1.6em;
+    color: var(--ink);
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+}
+.section-lead {
+    color: var(--muted);
+    margin: 0 0 22px;
+    max-width: 70ch;
+}
+.card {
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: 28px;
+    border: 1px solid var(--line);
+}
+.card + .card { margin-top: 24px; }
+
+/* ---------- Hero (paper) ---------- */
+.hero {
+    position: relative;
+    background:
+        radial-gradient(circle at 0% 0%, rgba(138, 43, 226, 0.18), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(80, 45, 127, 0.22), transparent 55%),
+        linear-gradient(135deg, #F8F5FD 0%, #EFE6FA 100%);
+    border-radius: var(--radius-lg);
+    padding: 48px 44px;
+    border: 1px solid var(--line);
+    overflow: hidden;
+}
+.hero .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: rgba(80, 45, 127, 0.10);
+    color: var(--primary);
+    border-radius: 999px;
+    font-size: 0.78em;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
+.hero h1 {
+    font-size: clamp(1.2em, 2.6vw, 2.15em);
+    line-height: 1.18;
+    color: var(--ink);
+    margin: 0 0 18px;
+    letter-spacing: -0.015em;
+    white-space: nowrap;
+}
+.hero .authors {
+    margin: 0 0 18px;
+    display: grid;
+    gap: 12px;
+}
+.hero .author {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.hero .author-name {
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 1.05em;
+}
+.hero .author-aff {
+    color: var(--muted);
+    font-size: 0.92em;
+}
+.hero .author-email {
+    color: var(--primary);
+    font-size: 0.92em;
+    text-decoration: none;
+}
+.hero .author-email:hover { text-decoration: underline; }
+.hero .author-site {
+    color: var(--primary);
+    font-size: 0.92em;
+    text-decoration: none;
+    word-break: break-all;
+}
+.hero .author-site:hover { text-decoration: underline; }
+
+.hero .abstract {
+    background: rgba(255, 255, 255, 0.7);
+    border-left: 4px solid var(--primary);
+    padding: 18px 22px;
+    border-radius: 10px;
+    margin-top: 22px;
+    box-shadow: var(--shadow-sm);
+}
+.hero .abstract h3 {
+    margin: 0 0 8px;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--primary);
+}
+.hero .abstract p {
+    margin: 0;
+    color: var(--text);
+    font-size: 0.98em;
+    line-height: 1.65;
+}
+
+.hero .button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+}
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: var(--primary);
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.92em;
+    font-weight: 500;
+    border: 1px solid transparent;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+.btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+    color: #fff;
+}
+.btn.btn-ghost {
+    background: transparent;
+    color: var(--primary);
+    border-color: var(--primary);
+}
+.btn.btn-ghost:hover {
+    background: rgba(80, 45, 127, 0.08);
+    color: var(--primary-dark);
+}
+
+/* ---------- Tile grid (homepage nav) ---------- */
+.tile-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+}
+.tile {
+    display: block;
+    padding: 22px;
+    background: var(--card-bg);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--line);
+    text-decoration: none;
+    color: var(--text);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    box-shadow: var(--shadow-sm);
+}
+.tile:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--thistle);
+    color: var(--text);
+}
+.tile-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--lavender);
+    color: var(--primary);
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+.tile-title {
+    font-size: 1.08em;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 4px;
+}
+.tile-sub {
+    font-size: 0.9em;
+    color: var(--muted);
+    margin: 0;
+}
+
+/* ---------- Tables ---------- */
+.table-wrap {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: #fff;
+}
+table.std {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95em;
+}
+table.std th,
+table.std td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+}
+table.std thead th {
+    background: var(--primary);
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    border-bottom: none;
+}
+table.std tbody tr:nth-child(even) { background: var(--lavender-pale); }
+table.std tbody tr:hover { background: var(--lavender-soft); }
+
+/* ---------- Method list (definitions) ---------- */
+.method-table th:first-child,
+.method-table td:first-child {
+    width: 22%;
+    font-weight: 600;
+    color: var(--primary-dark);
+    white-space: nowrap;
+}
+.method-table .formula {
+    font-family: 'Cambria Math', 'Latin Modern Math', Georgia, serif;
+    font-size: 1.02em;
+    color: var(--ink);
+}
+
+/* ---------- Journal list ---------- */
+.journal-block {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+.journal-card {
+    background: var(--lavender-pale);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--primary);
+    border-radius: var(--radius-md);
+    padding: 22px 24px;
+}
+.journal-card h3 {
+    margin: 0 0 8px;
+    color: var(--primary);
+    font-size: 1.08em;
+    letter-spacing: 0.2px;
+}
+.journal-card p {
+    margin: 0;
+    color: var(--text);
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+    background: linear-gradient(135deg, #3E2261 0%, #502D7F 100%);
+    color: rgba(255, 255, 255, 0.92);
+    text-align: center;
+    padding: 32px 24px;
+    font-size: 0.92em;
+    margin-top: 40px;
+}
+.site-footer a { color: #E6E6FA; text-decoration: none; }
+.site-footer a:hover { text-decoration: underline; }
+.site-footer .footer-inner {
+    max-width: 1240px;
+    margin: 0 auto;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+    .hero { padding: 32px 22px; }
+    .hero h1 { white-space: normal; }
+    .page { padding: 24px 18px 48px; }
+    .card { padding: 22px; }
+    .site-header .nav-wrap { padding: 0 18px; }
+    .site-header .brand-title { font-size: 1em; }
+    table.std { font-size: 0.88em; }
+    table.std th, table.std td { padding: 10px 10px; }
+}

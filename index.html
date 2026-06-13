@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranking Scholars When Journals and Citations Matter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .home-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 28px;
+            align-items: start;
+        }
+        .home-grid .stat-stack {
+            display: grid;
+            gap: 16px;
+        }
+        .stat-card {
+            background: #fff;
+            border-radius: var(--radius-md);
+            padding: 22px 24px;
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow-sm);
+        }
+        .stat-card h4 {
+            margin: 0 0 6px;
+            color: var(--primary);
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        }
+        .stat-card p {
+            margin: 0;
+            color: var(--text);
+            font-size: 0.96em;
+            line-height: 1.6;
+        }
+        @media (max-width: 900px) {
+            .home-grid { grid-template-columns: 1fr; }
+        }
+        .tile .tile-icon {
+            width: auto;
+            height: auto;
+            padding: 6px 12px;
+            display: inline-block;
+            font-size: 0.95em;
+            letter-spacing: 0.2px;
+        }
+        .nav-layout {
+            display: grid;
+            gap: 18px;
+        }
+        .tile-feature {
+            position: relative;
+            display: block;
+            padding: 28px 32px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: var(--radius-md);
+            border: 1px solid var(--primary-dark);
+            box-shadow: var(--shadow-md);
+            color: #fff;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            overflow: hidden;
+        }
+        .tile-feature:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            color: #fff;
+        }
+        .tile-feature .tile-eyebrow {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(255, 255, 255, 0.18);
+            color: #fff;
+            border-radius: 999px;
+            font-size: 0.72em;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+        .tile-feature .tile-feature-title {
+            margin: 0 0 8px;
+            font-size: 1.7em;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.2px;
+        }
+        .tile-feature .tile-feature-sub {
+            margin: 0;
+            font-size: 1em;
+            line-height: 1.55;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 60ch;
+        }
+        .tile-feature .tile-feature-arrow {
+            position: absolute;
+            right: 28px;
+            bottom: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.18);
+            display: grid;
+            place-items: center;
+            font-size: 1.2em;
+            font-weight: 700;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+        .tile-feature:hover .tile-feature-arrow {
+            transform: translateX(4px);
+            background: rgba(255, 255, 255, 0.28);
+        }
+        .tile-grid-secondary {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        @media (max-width: 900px) {
+            .tile-grid-secondary { grid-template-columns: repeat(2, 1fr); }
+            .tile-feature { padding: 22px; }
+            .tile-feature .tile-feature-title { font-size: 1.35em; }
+            .tile-feature .tile-feature-arrow { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="nav-wrap">
+            <a class="brand" href="index.html">
+                <span class="brand-mark">Ranking Scholars in Economics</span>
+            </a>
+            <nav class="site-nav">
+                <a href="index.html" class="active">Home</a>
+                <a href="ranking.html">Ranking</a>
+                <a href="algorithms.html">Method</a>
+                <a href="university.html">University</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page">
+        <section class="hero section">
+            <span class="eyebrow">Working paper</span>
+            <h1>Ranking Scholars When Journals and Citations Matter</h1>
+
+            <div class="authors">
+                <div class="author">
+                    <span class="author-name">Yangyi Deng</span>
+                    <span class="author-aff">Department of Decisions, Operations and Technology, The Chinese University of Hong Kong</span>
+                    <a class="author-email" href="mailto:dengyangyi@link.cuhk.edu.hk">dengyangyi@link.cuhk.edu.hk</a>
+                    <a class="author-site" href="https://yydeng.github.io/" target="_blank" rel="noopener">https://yydeng.github.io/</a>
+                </div>
+                <div class="author">
+                    <span class="author-name">Chiu Yu Ko</span>
+                    <span class="author-aff">Department of Decisions, Operations and Technology and Department of Economics, The Chinese University of Hong Kong</span>
+                    <a class="author-email" href="mailto:chiuyuko@cuhk.edu.hk">chiuyuko@cuhk.edu.hk</a>
+                    <a class="author-site" href="https://kochiuyu.github.io/" target="_blank" rel="noopener">https://kochiuyu.github.io/</a>
+                </div>
+            </div>
+
+            <div class="abstract">
+                <h3>Abstract</h3>
+                <p>Evaluating scholarly output is central to academic resource allocation, yet the profession remains divided between metrics based on journal prestige and those based on citation impact. We develop a unified axiomatic framework that integrates ordinal journal tiers with cardinal citation counts. Within it, we characterize two complementary families of scholar-ranking rules: the <em>journal-based</em> <strong>Bean-Counting</strong> family, which applies explicit citation thresholds to journal placements, and the <em>citation-based</em> <strong>Asymmetric Constant Elasticity of Substitution (CES)</strong> aggregators, which reward publication breadth within recognized journals and citation depth outside them. Our application to rank economists at QS Top 100 universities (2023&ndash;2026) yields three main findings: journal-based and citation-based rules diverge sharply; this divergence varies substantially across fields; and rules anchored to top-tier journal placement are more robust to field-specific citation rescaling.</p>
+            </div>
+
+        </section>
+
+        <section class="section">
+            <span class="section-eyebrow">Research Motivation</span>
+            <h2 class="section-title">Why measure scholarly impact in two complementary ways?</h2>
+            <p class="section-lead">Journal placement is an ex-ante signal of quality. Citations are an ex-post signal of impact. Each omits what the other captures, and fields weigh them differently. We combine both in one framework with two complementary ranking families, plus an interactive tool to see how rankings change.</p>
+
+            <div class="home-grid">
+                <div class="card">
+                    <span class="section-eyebrow">At a glance</span>
+                    <h3 style="margin:0 0 10px;">Two complementary rule families</h3>
+                    <p style="margin:0 0 14px;color:var(--muted);">The paper formalizes two families of scholar-ranking rules:</p>
+                    <ul style="margin:0;padding-left:22px;line-height:1.7;">
+                        <li><strong>Bean-Counting (BC)</strong> — count publications in recognized journals, with citation thresholds adjusting credit for placements outside top tiers.</li>
+                        <li><strong>CES (CES)</strong> — reward publication breadth within recognized journals and citation depth outside them via an elasticity-of-substitution aggregator.</li>
+                    </ul>
+                </div>
+                <div class="stat-stack">
+                    <div class="stat-card">
+                        <h4>Sample</h4>
+                        <p>Scholars from the economics departments of universities ranked in the QS Top 100 across from 2023 to 2026.
+                        </p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Rules</h4>
+                        <p>Bibliometric baselines (h-index, i10, Euclidean, citation counts) alongside the BC family and the CES family.</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Classification</h4>
+                        <p>Filter by field or continent  — explore in the Ranking page.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <span class="section-eyebrow">Explore</span>
+            <h2 class="section-title">Navigate the project</h2>
+            <div class="nav-layout">
+                <a class="tile-feature" href="ranking.html">
+                    <span class="tile-eyebrow">Main Result</span>
+                    <h3 class="tile-feature-title">Scholar Ranking</h3>
+                    <p class="tile-feature-sub">Interactive scholar rankings across every rule — compare the BC and CES families side by side, and explore how rankings shift across methods.</p>
+                    <span class="tile-feature-arrow" aria-hidden="true">&rarr;</span>
+                </a>
+                <div class="tile-grid tile-grid-secondary">
+                    <a class="tile" href="algorithms.html">
+                        <div class="tile-icon">Ranking Methods</div>
+                        <p class="tile-sub">Formal definitions of every rule.</p>
+                    </a>
+                    <a class="tile" href="algorithms.html#journal-lists">
+                        <div class="tile-icon">Journal Lists</div>
+                        <p class="tile-sub">Definitions of Top Five and Top A journal sets.</p>
+                    </a>
+                    <a class="tile" href="algorithms.html#field-classification">
+                        <div class="tile-icon">Field Classification</div>
+                        <p class="tile-sub">Paper-level fields and scholar primary-field assignment.</p>
+                    </a>
+                    <a class="tile" href="university.html">
+                        <div class="tile-icon">University Ranking</div>
+                        <p class="tile-sub">The QS Top 100 institutions covered by our sample.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    Ranking Scholars in Economics &middot; The Chinese University of Hong Kong<br>
+    Contact:
+    Yangyi Deng <a href="mailto:dengyangyi@link.cuhk.edu.hk">dengyangyi@link.cuhk.edu.hk</a>
+    &middot;
+    Chiu Yu Ko <a href="mailto:chiuyuko@cuhk.edu.hk">chiuyuko@cuhk.edu.hk</a>
+  </div>
+</footer>
+    
+</body>
+</html>
