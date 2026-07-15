@@ -27,7 +27,14 @@
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+/* Stop iOS Safari from auto-inflating long text blocks (e.g. the rule
+   explanations in the Method table), which made them look oversized on iPhone
+   while short labels stayed normal. Has no effect on desktop. */
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
