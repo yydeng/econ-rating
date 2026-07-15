@@ -391,7 +391,7 @@
         <section class="section">
             <span class="section-eyebrow">Empirical Application</span>
             <h1 class="ranking-heading" id="ranking-title">Ranking based on h-index</h1>
-            <p class="ranking-sub">Choose an index and filter by field or continent to explore how scholar rankings shift across rules.</p>
+            <p class="ranking-sub">Choose an index and filter by field to explore how scholar rankings shift across rules. For each index, we display only the top 20% highest-ranked scholars within the current selection.</p>
         </section>
 
         <section class="section">
@@ -431,27 +431,8 @@
                         </div>
                     </div>
 
-                    <div class="field-group">
-                        <h4>Continents</h4>
-                        <div class="multi-select-container">
-                            <div class="selected-display" id="selected-affiliations">
-                                <span class="placeholder">Select continents...</span>
-                            </div>
-                            <div class="dropdown-panel" id="affiliation-options-dropdown">
-                                <div class="search-box">
-                                    <input type="text" id="affiliation-search" placeholder="Search continents...">
-                                </div>
-                                <ul class="option-list"></ul>
-                            </div>
-                        </div>
-                        <div class="selection-buttons">
-                            <button type="button" id="select-all-affiliations">All</button>
-                            <button type="button" id="deselect-all-affiliations">Deselect all</button>
-                        </div>
-                    </div>
-
                     <button type="submit" id="filter-button" class="submit-button">Update Ranking</button>
-                    <div class="help-note">Select an index, fields, and continents, then click Update Ranking to refresh the table.</div>
+                    <div class="help-note">Select an index and fields, then click Update Ranking to refresh the table. For each index, we display only the top 20% highest-ranked scholars within the current selection.</div>
                 </aside>
 
                 <div class="results-panel">
@@ -463,14 +444,13 @@
                                 <tr>
                                     <th>Rank</th>
                                     <th>Scholar</th>
-                                    <th>Continent</th>
                                     <th>University</th>
                                     <th>Field</th>
                                     <th>Index</th>
                                 </tr>
                             </thead>
                             <tbody id="table-body">
-                                <tr><td colspan="6" class="loading">Loading data...</td></tr>
+                                <tr><td colspan="5" class="loading">Loading data...</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -517,10 +497,8 @@
         let pageSize = 50;
         let selectedIndexType = "h_index";
         let selectedRankType = "h_rank";
-        let uniqueAffiliations = [];
         let uniqueFields = [];
         let selectedFields = [];
-        let selectedAffiliations = [];
 
         // Index options. Value keys (e.g. dbc, crbc) are internal property names; the labels are user-facing.
         // The CSV's BC/CMBC/CABC/GCABC/Double_CES columns map to dbc/crbc/cebc/tcebc/aces here.
@@ -587,28 +565,20 @@
             setupIndexDropdown();
 
             document.getElementById('selected-fields').addEventListener('click', function() { toggleDropdown('field-options-dropdown'); });
-            document.getElementById('selected-affiliations').addEventListener('click', function() { toggleDropdown('affiliation-options-dropdown'); });
             document.getElementById('selected-index').addEventListener('click', function() { toggleDropdown('index-options-dropdown'); });
 
             document.getElementById('field-search').addEventListener('input', function() { filterOptions('field', this.value); });
-            document.getElementById('affiliation-search').addEventListener('input', function() { filterOptions('affiliation', this.value); });
             document.getElementById('index-search').addEventListener('input', function() { filterOptions('index', this.value); });
 
             document.addEventListener('click', function(event) {
                 const fieldDropdown = document.getElementById('field-options-dropdown');
-                const affiliationDropdown = document.getElementById('affiliation-options-dropdown');
                 const indexDropdown = document.getElementById('index-options-dropdown');
                 const fieldDisplay = document.getElementById('selected-fields');
-                const affiliationDisplay = document.getElementById('selected-affiliations');
                 const indexDisplay = document.getElementById('selected-index');
 
                 if (!fieldDisplay.contains(event.target) && !fieldDropdown.contains(event.target)) {
                     fieldDropdown.classList.remove('show');
                     fieldDisplay.classList.remove('active');
-                }
-                if (!affiliationDisplay.contains(event.target) && !affiliationDropdown.contains(event.target)) {
-                    affiliationDropdown.classList.remove('show');
-                    affiliationDisplay.classList.remove('active');
                 }
                 if (!indexDisplay.contains(event.target) && !indexDropdown.contains(event.target)) {
                     indexDropdown.classList.remove('show');
@@ -618,8 +588,6 @@
 
             document.getElementById('select-all-fields').addEventListener('click', function() { selectAllItems('field'); });
             document.getElementById('deselect-all-fields').addEventListener('click', function() { deselectAllItems('field'); });
-            document.getElementById('select-all-affiliations').addEventListener('click', function() { selectAllItems('affiliation'); });
-            document.getElementById('deselect-all-affiliations').addEventListener('click', function() { deselectAllItems('affiliation'); });
 
             document.getElementById('page-jump-button').addEventListener('click', jumpToPage);
             document.getElementById('page-number-input').addEventListener('keypress', function(e) {
@@ -702,7 +670,6 @@
         function getDisplayIdForDropdown(dropdownId) {
             switch (dropdownId) {
                 case 'field-options-dropdown': return 'selected-fields';
-                case 'affiliation-options-dropdown': return 'selected-affiliations';
                 case 'index-options-dropdown': return 'selected-index';
                 default: return '';
             }
@@ -725,11 +692,7 @@
                 if (!checkbox.checked) {
                     checkbox.checked = true;
                     item.classList.add('selected');
-                    if (type === 'field') {
-                        if (!selectedFields.includes(value.toLowerCase())) selectedFields.push(value.toLowerCase());
-                    } else {
-                        if (!selectedAffiliations.includes(value)) selectedAffiliations.push(value);
-                    }
+                    if (!selectedFields.includes(value.toLowerCase())) selectedFields.push(value.toLowerCase());
                 }
             });
             updateSelectedDisplay(type);
@@ -742,27 +705,20 @@
                 checkbox.checked = false;
                 item.classList.remove('selected');
             });
-            if (type === 'field') selectedFields = [];
-            else selectedAffiliations = [];
+            selectedFields = [];
             updateSelectedDisplay(type);
         }
 
         function toggleOption(type, value, checked) {
-            if (type === 'field') {
-                const index = selectedFields.indexOf(value.toLowerCase());
-                if (checked && index === -1) selectedFields.push(value.toLowerCase());
-                else if (!checked && index !== -1) selectedFields.splice(index, 1);
-            } else {
-                const index = selectedAffiliations.indexOf(value);
-                if (checked && index === -1) selectedAffiliations.push(value);
-                else if (!checked && index !== -1) selectedAffiliations.splice(index, 1);
-            }
+            const index = selectedFields.indexOf(value.toLowerCase());
+            if (checked && index === -1) selectedFields.push(value.toLowerCase());
+            else if (!checked && index !== -1) selectedFields.splice(index, 1);
             updateSelectedDisplay(type);
         }
 
         function updateSelectedDisplay(type) {
-            const displayElement = document.getElementById(type === 'field' ? 'selected-fields' : 'selected-affiliations');
-            const selected = type === 'field' ? selectedFields : selectedAffiliations;
+            const displayElement = document.getElementById('selected-fields');
+            const selected = selectedFields;
             displayElement.innerHTML = '';
 
             if (selected.length === 0) {
@@ -771,9 +727,7 @@
             }
 
             selected.forEach(item => {
-                const displayName = type === 'field'
-                    ? (uniqueFields.find(f => f.toLowerCase() === item) || item)
-                    : item;
+                const displayName = uniqueFields.find(f => f.toLowerCase() === item) || item;
                 const tag = document.createElement('span');
                 tag.className = 'selected-tag';
                 tag.innerHTML = `${displayName} <span class="remove-tag" data-value="${item}" data-type="${type}">&times;</span>`;
@@ -826,11 +780,10 @@
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
                         parseCSVData(xhr.responseText);
-                        populateAffiliationOptions();
                         filterData();
                     } else {
                         document.getElementById('table-body').innerHTML = `
-                            <tr><td colspan="6" style="color:#b00;text-align:center;">
+                            <tr><td colspan="5" style="color:#b00;text-align:center;">
                                 Failed to load data: ${xhr.statusText || 'Please ensure the file exists and run this page using a server.'}
                             </td></tr>`;
                     }
@@ -838,7 +791,7 @@
             };
             xhr.onerror = function() {
                 document.getElementById('table-body').innerHTML = `
-                    <tr><td colspan="6" style="color:#b00;text-align:center;">
+                    <tr><td colspan="5" style="color:#b00;text-align:center;">
                         Failed to load data: The CSV file cannot be accessed. Please ensure the file exists and run this page using a server.
                     </td></tr>`;
             };
@@ -848,7 +801,6 @@
         function parseCSVData(csvText) {
             const lines = csvText.split('\n');
             allScholars = [];
-            uniqueAffiliations = new Set();
             uniqueFields = new Set();
 
             for (let i = 1; i < lines.length; i++) {
@@ -871,7 +823,6 @@
                     num: parseInt(row[0]),
                     name: row[1].replace(/"/g, ''),
                     field: row[2],
-                    continent: row[3],
                     university: row[4],
                     h_index: parseInt(row[5]),
                     h_rank: parseInt(row[6]),
@@ -903,20 +854,15 @@
                     abc_multiply_ces_rank: parseInt(row[32])
                 };
 
-                if (scholar.continent) uniqueAffiliations.add(scholar.continent);
                 if (scholar.field) uniqueFields.add(scholar.field);
                 allScholars.push(scholar);
             }
 
-            uniqueAffiliations = Array.from(uniqueAffiliations).sort();
             uniqueFields = Array.from(uniqueFields).sort();
             selectedFields = uniqueFields.map(f => f.toLowerCase());
-            selectedAffiliations = [...uniqueAffiliations];
 
             populateFieldOptions();
-            populateAffiliationOptions();
             updateSelectedDisplay('field');
-            updateSelectedDisplay('affiliation');
         }
 
         function populateFieldOptions() {
@@ -936,33 +882,16 @@
             });
         }
 
-        function populateAffiliationOptions() {
-            const optionList = document.querySelector('#affiliation-options-dropdown .option-list');
-            optionList.innerHTML = '';
-            uniqueAffiliations.forEach(affiliation => {
-                const li = document.createElement('li');
-                li.className = 'option-item selected';
-                li.innerHTML = `<input type="checkbox" value="${affiliation}" checked> ${affiliation}`;
-                optionList.appendChild(li);
-                li.addEventListener('click', function(e) {
-                    const checkbox = this.querySelector('input[type="checkbox"]');
-                    if (e.target !== checkbox) checkbox.checked = !checkbox.checked;
-                    this.classList.toggle('selected', checkbox.checked);
-                    toggleOption('affiliation', checkbox.value, checkbox.checked);
-                });
-            });
-        }
-
         function filterData() {
             filteredScholars = allScholars.filter(scholar => {
-                const fieldMatch = selectedFields.includes(scholar.field.toLowerCase());
-                const affiliationMatch = selectedAffiliations.length === 0
-                    ? true
-                    : selectedAffiliations.some(aff => scholar.continent === aff);
-                return fieldMatch && affiliationMatch;
+                return selectedFields.includes(scholar.field.toLowerCase());
             });
 
             filteredScholars.sort((a, b) => a[selectedRankType] - b[selectedRankType]);
+
+            // Keep only the top 20% ranked scholars for the selected index.
+            const cutoff = Math.ceil(filteredScholars.length * 0.2);
+            filteredScholars = filteredScholars.slice(0, cutoff);
 
             const selectedOption = indexOptions.find(option => option.value === selectedIndexType);
             if (selectedOption) {
@@ -983,7 +912,7 @@
             tableBody.innerHTML = '';
 
             if (filteredScholars.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;">No scholars match the filters.</td></tr>`;
+                tableBody.innerHTML = `<tr><td colspan="5" style="text-align:center;">No scholars match the filters.</td></tr>`;
                 return;
             }
 
@@ -999,7 +928,7 @@
                 let rankValue = i + 1;
                 if (typeof indexValue === 'number' && !Number.isInteger(indexValue)) indexValue = indexValue.toFixed(2);
 
-                const cells = [rankValue, scholar.name, scholar.continent, scholar.university, scholar.field, indexValue];
+                const cells = [rankValue, scholar.name, scholar.university, scholar.field, indexValue];
                 cells.forEach(cellData => {
                     const cell = document.createElement('td');
                     cell.textContent = cellData;
