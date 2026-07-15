@@ -370,6 +370,12 @@
             color: var(--muted);
             font-style: italic;
         }
+        @media (max-width: 560px) {
+            .pagination-nav { flex-wrap: wrap; justify-content: center; }
+            .pagination { flex-wrap: wrap; justify-content: center; }
+            .table-header { justify-content: center; }
+            .page-jump { text-align: center; }
+        }
     </style>
 </head>
 <body>
@@ -499,6 +505,30 @@
         let selectedRankType = "h_rank";
         let uniqueFields = [];
         let selectedFields = [];
+
+        // Display labels for the raw field codes stored in index.csv. Matching/filtering
+        // still uses the raw codes; only the user-facing text is mapped here.
+        const fieldDisplayNames = {
+            "behavior-experiment": "Behavior/Experiment",
+            "development": "Development",
+            "econometrics": "Econometrics",
+            "finance": "Finance",
+            "history": "History",
+            "i_finance": "International Finance",
+            "i_organization": "Industrial Organization",
+            "i_trade": "International Trade",
+            "labor": "Labor",
+            "macro": "Macro",
+            "micro_theory": "Micro Theory",
+            "multiple-field": "Multiple-field",
+            "other": "Other",
+            "p_finance": "Public Finance",
+            "political_econ": "Political Economy"
+        };
+        function fieldLabel(raw) {
+            if (raw == null) return raw;
+            return fieldDisplayNames[String(raw).toLowerCase()] || raw;
+        }
 
         // Index options. Value keys (e.g. dbc, crbc) are internal property names; the labels are user-facing.
         // The CSV's BC/CMBC/CABC/GCABC/Double_CES columns map to dbc/crbc/cebc/tcebc/aces here.
@@ -727,7 +757,7 @@
             }
 
             selected.forEach(item => {
-                const displayName = uniqueFields.find(f => f.toLowerCase() === item) || item;
+                const displayName = fieldLabel(uniqueFields.find(f => f.toLowerCase() === item) || item);
                 const tag = document.createElement('span');
                 tag.className = 'selected-tag';
                 tag.innerHTML = `${displayName} <span class="remove-tag" data-value="${item}" data-type="${type}">&times;</span>`;
@@ -871,7 +901,7 @@
             uniqueFields.forEach(field => {
                 const li = document.createElement('li');
                 li.className = 'option-item selected';
-                li.innerHTML = `<input type="checkbox" value="${field}" checked> ${field}`;
+                li.innerHTML = `<input type="checkbox" value="${field}" checked> ${fieldLabel(field)}`;
                 optionList.appendChild(li);
                 li.addEventListener('click', function(e) {
                     const checkbox = this.querySelector('input[type="checkbox"]');
@@ -928,7 +958,7 @@
                 let rankValue = i + 1;
                 if (typeof indexValue === 'number' && !Number.isInteger(indexValue)) indexValue = indexValue.toFixed(2);
 
-                const cells = [rankValue, scholar.name, scholar.university, scholar.field, indexValue];
+                const cells = [rankValue, scholar.name, scholar.university, fieldLabel(scholar.field), indexValue];
                 cells.forEach(cellData => {
                     const cell = document.createElement('td');
                     cell.textContent = cellData;
