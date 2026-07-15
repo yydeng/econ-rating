@@ -368,6 +368,7 @@ table.std tbody tr:hover { background: var(--lavender-soft); }
     color: var(--primary-dark);
     white-space: nowrap;
 }
+.method-table thead th:first-child { color: #fff; }
 .method-table .formula {
     font-family: 'Cambria Math', 'Latin Modern Math', Georgia, serif;
     font-size: 1.02em;
