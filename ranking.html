@@ -28,8 +28,11 @@
             align-items: start;
         }
         @media (max-width: 960px) {
-            .ranking-layout { grid-template-columns: 1fr; }
+            .ranking-layout { grid-template-columns: minmax(0, 1fr); }
         }
+        /* Prevent the table/formula from forcing the grid wider than the viewport (which
+           would push the full-width header off and cause horizontal page scroll on mobile). */
+        .ranking-layout > * { min-width: 0; }
 
         .filters {
             background: #fff;
