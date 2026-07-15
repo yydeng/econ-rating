@@ -57,6 +57,11 @@
             padding-left: 22px;
             line-height: 1.6;
         }
+        /* On mobile, let wide formulas scroll horizontally instead of being clipped. */
+        @media (max-width: 768px) {
+            .method-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .method-table-wrap table.std { min-width: 520px; }
+        }
     </style>
 </head>
 <body>
