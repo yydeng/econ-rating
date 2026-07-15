@@ -125,6 +125,70 @@
             .tile-feature .tile-feature-title { font-size: 1.35em; }
             .tile-feature .tile-feature-arrow { display: none; }
         }
+        .figure-stack {
+            display: grid;
+            gap: 26px;
+            margin-top: 4px;
+        }
+        .figure-card {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            padding: 22px 24px 24px;
+            overflow: hidden;
+        }
+        .figure-card .figure-eyebrow {
+            display: inline-block;
+            font-size: 0.72em;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        .figure-card h3 {
+            margin: 0 0 6px;
+            font-size: 1.12em;
+            color: var(--ink);
+        }
+        .figure-card p {
+            margin: 0;
+            color: var(--text);
+            font-size: 0.94em;
+            line-height: 1.6;
+        }
+        .figure-card figure {
+            margin: 16px 0 0;
+        }
+        .figure-card img {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-width: 960px;
+            margin: 0 auto;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: #fff;
+        }
+        .figure-card figcaption {
+            margin: 12px auto 0;
+            max-width: 960px;
+            color: var(--muted);
+            font-size: 0.86em;
+            line-height: 1.55;
+        }
+        .paper-cta {
+            margin-top: 26px;
+            padding: 22px 26px;
+            background: var(--lavender-pale);
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--primary-light);
+            border-radius: var(--radius-md);
+            color: var(--text);
+            font-size: 0.98em;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
@@ -164,24 +228,24 @@
 
             <div class="abstract">
                 <h3>Abstract</h3>
-                <p>Evaluating scholarly output is central to academic resource allocation, yet the profession remains divided between metrics based on journal prestige and those based on citation impact. We develop a unified axiomatic framework that integrates ordinal journal tiers with cardinal citation counts. Within it, we characterize two complementary families of scholar-ranking rules: the <em>journal-based</em> <strong>Bean-Counting</strong> family, which applies explicit citation thresholds to journal placements, and the <em>citation-based</em> <strong>Asymmetric Constant Elasticity of Substitution (CES)</strong> aggregators, which reward publication breadth within recognized journals and citation depth outside them. Our application to rank economists at QS Top 100 universities (2023&ndash;2026) yields three main findings: journal-based and citation-based rules diverge sharply; this divergence varies substantially across fields; and rules anchored to top-tier journal placement are more robust to field-specific citation rescaling.</p>
+                <p><strong>Scholarly evaluation must reconcile two imperfect signals: the ex-ante judgment reflected in journal prestige and the ex-post impact measured by citations.</strong> We develop a unified axiomatic framework that integrates an ordinal journal list with cardinal citation counts and characterize two complementary families of scholar-ranking rules. First, <strong>journal-based Bean-Counting</strong> rules treat journal-list placement and citation counts as either substitutes or complements through citation thresholds. Second, <strong>citation-based asymmetric CES aggregators</strong> reward publication breadth within the journal list and citation depth outside the list. We apply these methods to 4,722 economists at QS Top 100 universities (2023&ndash;2026) and find sharply divergent rankings in the two families of rules across different fields, especially in microeconomic theory and economic history. We also show that journal-based rules are highly robust to field-specific citation rescaling, whereas citation-based rules generate significant ranking instability.</p>
             </div>
 
         </section>
 
         <section class="section">
             <span class="section-eyebrow">Research Motivation</span>
-            <h2 class="section-title">Why measure scholarly impact in two complementary ways?</h2>
-            <p class="section-lead">Journal placement is an ex-ante signal of quality. Citations are an ex-post signal of impact. Each omits what the other captures, and fields weigh them differently. We combine both in one framework with two complementary ranking families, plus an interactive tool to see how rankings change.</p>
+            <h2 class="section-title">Why measure scholarly impact using both journal prestige and citations?</h2>
+            <p class="section-lead">Journal placement provides an ex-ante signal of research quality, whereas citations capture ex-post scholarly impact. Because each contains information the other omits, and disciplines place different weights on them, we integrate both within a unified framework comprising two complementary families of scholar-ranking rules and an interactive tool that shows how rankings change under alternative evaluative priorities.</p>
 
             <div class="home-grid">
                 <div class="card">
                     <span class="section-eyebrow">At a glance</span>
-                    <h3 style="margin:0 0 10px;">Two complementary rule families</h3>
-                    <p style="margin:0 0 14px;color:var(--muted);">The paper formalizes two families of scholar-ranking rules:</p>
+                    <h3 style="margin:0 0 10px;">Two complementary families of scholar-ranking rules</h3>
+                    <p style="margin:0 0 14px;color:var(--muted);">Our framework turns this tension into a ranking-design problem by offering two complementary approaches:</p>
                     <ul style="margin:0;padding-left:22px;line-height:1.7;">
-                        <li><strong>Bean-Counting (BC)</strong> — count publications in recognized journals, with citation thresholds adjusting credit for placements outside top tiers.</li>
-                        <li><strong>CES (CES)</strong> — reward publication breadth within recognized journals and citation depth outside them via an elasticity-of-substitution aggregator.</li>
+                        <li><strong>Bean-Counting</strong> — starts from journal placement and uses citation thresholds to extend or restrict credit across publications.</li>
+                        <li><strong>CES</strong> — starts from citation impact and uses journal-dependent elasticities to reward publication breadth inside recognized journals and citation depth outside them.</li>
                     </ul>
                 </div>
                 <div class="stat-stack">
@@ -192,11 +256,11 @@
                     </div>
                     <div class="stat-card">
                         <h4>Rules</h4>
-                        <p>Bibliometric baselines (h-index, i10, Euclidean, citation counts) alongside the BC family and the CES family.</p>
+                        <p>Bibliometric baselines (h-index, i10, Euclidean, citation counts) alongside the Bean-Counting and CES families.</p>
                     </div>
                     <div class="stat-card">
                         <h4>Classification</h4>
-                        <p>Filter by field or continent  — explore in the Ranking page.</p>
+                        <p>Filter by field — explore in the Ranking page.</p>
                     </div>
                 </div>
             </div>
@@ -209,7 +273,7 @@
                 <a class="tile-feature" href="ranking.html">
                     <span class="tile-eyebrow">Main Result</span>
                     <h3 class="tile-feature-title">Scholar Ranking</h3>
-                    <p class="tile-feature-sub">Interactive scholar rankings across every rule — compare the BC and CES families side by side, and explore how rankings shift across methods.</p>
+                    <p class="tile-feature-sub">Interactive scholar rankings across every rule — compare the Bean-Counting and CES families side by side, and explore how rankings shift across methods.</p>
                     <span class="tile-feature-arrow" aria-hidden="true">&rarr;</span>
                 </a>
                 <div class="tile-grid tile-grid-secondary">
@@ -230,6 +294,68 @@
                         <p class="tile-sub">The QS Top 100 institutions covered by our sample.</p>
                     </a>
                 </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <span class="section-eyebrow">Empirical Results</span>
+            <h2 class="section-title">What the rankings reveal</h2>
+            <p class="section-lead" style="max-width:none;">We apply both families to 4,722 economists at QS Top 100 universities (2023&ndash;2026) through three exercises: First, we compare the scholar rankings generated by all rules in both families and benchmark them against conventional metrics. Second, we examine how field-level rankings vary across rules. Third, we assess the sensitivity of each rule to field-specific citation rescaling. Five figures summarize the main findings.</p>
+
+            <div class="figure-stack">
+                <div class="figure-card">
+                    <span class="figure-eyebrow">Exercise 1 · Comparison of rules</span>
+                    <h3>How the rules relate to one another</h3>
+                    <p>A clustered heatmap of Kendall rank correlations across all rules and benchmarks. Journal-based and citation-based metrics capture distinct dimensions — the <em>h</em>- and <em>i10</em>-indices correlate strongly with each other yet diverge sharply from ABC. The Bean-Counting family splits into two clusters (strict ABC/CRBC vs. broader DBC/CEBC/TCEBC), and the CES family stands apart from traditional benchmarks.</p>
+                    <figure>
+                        <img src="clustered_heatmap.png" alt="Clustered heatmap of Kendall rank correlations of all rules, with a dendrogram grouping the rules by similarity.">
+                        <figcaption>Kendall rank correlations of all rules; the dendrogram on the left shows the hierarchical clustering of methods by similarity.</figcaption>
+                    </figure>
+                </div>
+
+                <div class="figure-card">
+                    <span class="figure-eyebrow">Exercise 2 · Field ranking stability</span>
+                    <h3>Field rankings across every rule</h3>
+                    <p>Average field rankings under all 14 fields, traced across each rule. Restricting to single-field scholars (3,416 scholars, 72.3% of the sample), the lines show which fields hold their position and which swing with the choice of rule.</p>
+                    <figure>
+                        <img src="parallel_total_100.png" alt="Parallel-coordinates plot of average rankings for all 14 economics fields across every ranking rule.">
+                        <figcaption>Average ranking of all 14 fields across rules.</figcaption>
+                    </figure>
+                </div>
+
+                <div class="figure-card">
+                    <span class="figure-eyebrow">Exercise 2 · Field ranking stability</span>
+                    <h3>The top-ranked and bottom-ranked fields</h3>
+                    <p>The three top-ranked fields — econometrics, behavior &amp; experiment, and industrial organization — stay near the top across rules, with econometrics almost always leading. At the other end, international finance and political economy remain consistently near the bottom.</p>
+                    <figure>
+                        <img src="parallel_extreme_100.png" alt="Parallel-coordinates plot of the fields with the highest and lowest average rankings across rules.">
+                        <figcaption>Fields with the highest and lowest average rankings.</figcaption>
+                    </figure>
+                </div>
+
+                <div class="figure-card">
+                    <span class="figure-eyebrow">Exercise 2 · Field ranking stability</span>
+                    <h3>The least stable fields</h3>
+                    <p>Microeconomic theory and economic history swing the most, for opposite reasons. Theorists rank first under journal-based rules but collapse to ranks 11&ndash;12 once citations dominate; economic historians rank highly under publication-volume rules but fall to the bottom under citation-weighted ones.</p>
+                    <figure>
+                        <img src="parallel_least_stable_100.png" alt="Parallel-coordinates plot of the fields with the least stable rankings across rules.">
+                        <figcaption>Fields with the least stable rankings across rules.</figcaption>
+                    </figure>
+                </div>
+
+                <div class="figure-card">
+                    <span class="figure-eyebrow">Exercise 3 · Rescaling robustness</span>
+                    <h3>Robustness to citation rescaling</h3>
+                    <p>Using econometrics (315 single-field scholars) as an illustration, we examine within-field ranking instability after field-specific citation rescaling. CRBC and ABC&times;CES are the most robust, leaving roughly 56% and 60% of scholars entirely unaffected, whereas citation-driven rules (<em>h</em>, <em>i10</em>, and CEBC) shift far more, with instability concentrated among mid-ranked scholars.</p>
+                    <figure>
+                        <img src="rescale_econometrics_grid_100.png" alt="Grid of panels, one per ranking method, showing ranking reversals and changes after citation rescaling for econometrics scholars.">
+                        <figcaption>Each panel corresponds to one ranking method, with scholars grouped into percentile bands from highest to lowest ranked. Dark gray bars indicate strict ranking reversals, while light gray bars indicate all ranking changes induced by rescaling, including both reversals and changes in ties.</figcaption>
+                    </figure>
+                </div>
+            </div>
+
+            <div class="paper-cta">
+                These figures present only the headline findings. We invite readers to consult the full paper for further details.
             </div>
         </section>
     </main>
