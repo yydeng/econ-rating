@@ -57,10 +57,20 @@
             padding-left: 22px;
             line-height: 1.6;
         }
-        /* On mobile, let wide formulas scroll horizontally instead of being clipped. */
+        /* On mobile, shrink the table text and let wide formulas scroll horizontally
+           instead of being clipped or dominating the screen. */
         @media (max-width: 768px) {
             .method-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-            .method-table-wrap table.std { min-width: 520px; }
+            .method-table-wrap table.std { min-width: 480px; font-size: 0.8em; }
+            .method-table-wrap table.std th,
+            .method-table-wrap table.std td { padding: 8px 10px; }
+            .method-table-wrap table.std .group-row td {
+                font-size: 0.68em;
+                padding: 7px 10px;
+            }
+            .method-table th:first-child,
+            .method-table td:first-child { white-space: normal; }
+            .pill { font-size: 0.66em; margin-left: 4px; padding: 2px 8px; }
         }
     </style>
 </head>
